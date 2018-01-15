@@ -32,7 +32,7 @@
 			<p:column headerText="Photo">
 				<h:outputLabel value="#{pro.photo}" />
 			</p:column>
-			<p:column headerText="Delete" widht="25">
+			<p:column headerText="Delete" widht="5%">
 				<p:commandButton action="#{profileBean.deleteProfile(pro)}"
 					icon="ui-icon-trash" update="profileTable" />
 			</p:column>
@@ -92,7 +92,7 @@
 			<p:column headerText="Raiting">
 				<h:outputLabel value="#{eve.raiting}" />
 			</p:column>
-			<p:column headerText="Delete" widht="25">
+			<p:column headerText="Delete" widht="25" >
 				<p:commandButton action="#{eventBean.deleteEvent(eve)}"
 					icon="ui-icon-trash" update="eventTable" />
 			</p:column>

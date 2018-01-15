@@ -6,18 +6,20 @@
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
-<h:head><title>LoginPage</title></h:head>
+<h:head>
+	<title>LoginPage</title>
+</h:head>
 <h:body>
-<h:form id="login" onsubmit="document.getEkenebtById('login').action='j_security_check';" prependId="false">
-<h:panelGrid columns="2">
-<h:outputLabel value="Username:" />
-<h:inputText id="j_username" name="j_username"/>
-<h:outputLabel value="Password:" />
-<h:inputText id="j_password" name="j_password"/>
+	<h:form>
+		<h:panelGrid columns="2">
+		<f:facet name="header">Login Form</f:facet>
+			<h:outputLabel value="Username:" />
+			<p:inputText value="#{login.username}" />
+			<h:outputLabel value="Password:" />
+			<p:password value="#{login.password}" />
+		<f:facet name="footer"><h:commandButton value="Login" action="#{login.loginController(username,password)}"/></f:facet>
+		
 </h:panelGrid>
-
-<h:commandButton value="Login"/>
-
-</h:form>
+	</h:form>
 </h:body>
 </html>

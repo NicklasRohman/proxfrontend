@@ -46,5 +46,4 @@ public class EventBean implements Serializable {
 		eventTarget.path("{id}").resolveTemplate("id", eve.getEventid()).request(MediaType.APPLICATION_XML).delete();
 
 	}
-
 }

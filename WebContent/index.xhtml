@@ -8,162 +8,126 @@
 	xmlns:p="http://primefaces.org/ui">
 <h:head></h:head>
 <h:body>
-	<h:form>
-		<p:dataTable id="profileTable" value="#{profileBean.profiles}"
-			var="pro">
-			<f:facet name="header">
-				<h:outputText value="Profiles" />
-			</f:facet>
-			<p:column headerText="Email">
-				<h:outputLabel value="#{pro.email}" />
-			</p:column>
-			<p:column headerText="Password">
-				<h:outputLabel value="#{pro.password}" />
-			</p:column>
-			<p:column headerText="Name">
-				<h:outputLabel value="#{pro.name}" />
-			</p:column>
-			<p:column headerText="Raiting">
-				<h:outputLabel value="#{pro.profileRating}" />
-			</p:column>
-			<p:column headerText="Bio">
-				<h:outputLabel value="#{pro.bio}" />
-			</p:column>
-			<p:column headerText="Photo">
-				<h:outputLabel value="#{pro.photo}" />
-			</p:column>
-			<p:column headerText="Delete" widht="5%">
-				<p:commandButton action="#{profileBean.deleteProfile(pro)}"
-					icon="ui-icon-trash" update="profileTable" />
-			</p:column>
-			<f:facet name="footer">
-				<p:commandLink value="Add profile" icon="ui-icon-plus"
-					oncomplete="PF('newProfileDialog').show()" />
-			</f:facet>
-		</p:dataTable>
+	<p:panelGrid columns="2">
+
+		<h:form>
+
+			<p:panelGrid columns="2">
+
+				<f:facet name="header">
+					<h:graphicImage url="/ProjectXFrontend/resourses/images/bild.jpg" />
+				</f:facet>
+
+				<h:outputText value="Name:" />
+				<h:outputText value="#{profileBean.profiles}" />
+
+				<h:outputText value="Team:" />
+				<h:outputText value="Los Angeles Lakers" />
+
+				<h:outputText value="Position:" />
+				<h:outputText value="Shooting Guard" />
+
+				<h:outputText value="Number:" />
+				<h:outputText value="24" />
+
+		<f:facet name="footer">
+<p:button href="adminpage.xhtml" value="Admin" rendered="admin"></p:button><p:button href="login.xhtml" value="Logout"></p:button>
+</f:facet>
+
+			</p:panelGrid>
 
 
-		<p:dialog dynamic="true" id="newProfileDialog"
-			widgetVar="newProfileDialog" width="300" height="300">
-			<p:outputPanel>
-				<p:outputLabel for="email" value="Email:" />
-				<p:inputText id="email" label="email"
-					value="#{profileBean.newProfile.email}" />
-				<p:outputLabel for="password" value="Password:" />
-				<p:inputText id="password" label="password"
-					value="#{profileBean.newProfile.password}" />
-				<p:outputLabel for="name" value="Name:" />
-				<p:inputText id="name" label="name"
-					value="#{profileBean.newProfile.name}" />
-				<p:outputLabel for="bio" value="Bio:" />
-				<p:inputText id="bio" label="bio"
-					value="#{profileBean.newProfile.bio}" />
-				<p:outputLabel for="profileRating" value="Rating:" />
-				<p:inputText id="profileRating" label="profileRating"
-					value="#{profileBean.newProfile.profileRating}" />
-				<p:outputLabel for="photo" value="Photo:" />
-				<p:inputText id="photo" label="photo"
-					value="#{profileBean.newProfile.photo}" />
-			</p:outputPanel>
-				<p:commandButton action="#{profileBean.createNewProfile}"
-					value="Spara" update="profileTable"
-					onsuccess="PF('newProfileDialog').hide()" />
+			<p:dataTable id="profileTable" value="#{profileBean.profiles}"
+				var="pro">
+				<f:facet name="header">
+					<h:outputText value="Profiles" />
+				</f:facet>
+				<p:column headerText="Email">
+					<h:outputLabel value="#{pro.email}" />
+				</p:column>
 
-		</p:dialog>
+				<p:column headerText="Name">
+					<h:outputLabel value="#{pro.name}" />
+				</p:column>
 
-		<p:separator />
+				<p:column headerText="Raiting">
+					<h:outputLabel value="#{pro.profileRating}" />
+				</p:column>
 
-		<p:dataTable id="eventTable" value="#{eventBean.events}" var="eve">
-			<f:facet name="header">
-				<h:outputText value="Events" />
-			</f:facet>
-			<p:column headerText="Name">
-				<h:outputLabel value="#{eve.name}" />
-			</p:column>
-			<p:column headerText="Category">
-				<h:outputLabel value="#{eve.catagory}" />
-			</p:column>
-			<p:column headerText="Date">
-				<h:outputLabel value="#{eve.date}" />
-			</p:column>
-			<p:column headerText="Location">
-				<h:outputLabel value="#{eve.location}" />
-			</p:column>
-			<p:column headerText="Raiting">
-				<h:outputLabel value="#{eve.raiting}" />
-			</p:column>
-			<p:column headerText="Delete" widht="25" >
-				<p:commandButton action="#{eventBean.deleteEvent(eve)}"
-					icon="ui-icon-trash" update="eventTable" />
-			</p:column>
+				<p:column headerText="Bio">
+					<h:outputLabel value="#{pro.bio}" />
+				</p:column>
 
-			<f:facet name="footer">
-				<p:commandLink value="Add event" icon="ui-icon-plus"
-					oncomplete="PF('newEventDialog').show()" />
-			</f:facet>
-		</p:dataTable>
+				<p:column headerText="Photo">
+					<h:inputFile value="" />
+					<h:outputLabel value="#{pro.photo}" />
+				</p:column>
+				<p:column headerText="Delete" widht="5%">
+					<p:commandButton action="#{profileBean.deleteProfile(pro)}"
+						icon="ui-icon-trash" update="profileTable" />
+				</p:column>
+
+			</p:dataTable>
+
+			<p:separator />
+
+			<p:dataTable id="eventTable" value="#{eventBean.events}" var="eve">
+				<f:facet name="header">
+					<h:outputText value="Events" />
+				</f:facet>
+				<p:column headerText="Name">
+					<h:outputLabel value="#{eve.name}" />
+				</p:column>
+				<p:column headerText="Category">
+					<h:outputLabel value="#{eve.catagory}" />
+				</p:column>
+				<p:column headerText="Date">
+					<h:outputLabel value="#{eve.date}" />
+				</p:column>
+				<p:column headerText="Location">
+					<h:outputLabel value="#{eve.location}" />
+				</p:column>
+				<p:column headerText="Raiting">
+					<h:outputLabel value="#{eve.raiting}" />
+				</p:column>
+				<p:column headerText="Delete" widht="25">
+					<p:commandButton action="#{eventBean.deleteEvent(eve)}"
+						icon="ui-icon-trash" update="eventTable" />
+				</p:column>
+
+				<f:facet name="footer">
+					<p:commandLink value="Add event" icon="ui-icon-plus"
+						update="eventTable" oncomplete="PF('newEventDialog').show()" />
+				</f:facet>
+			</p:dataTable>
 
 
-		<p:dialog dynamic="true" id="newEventDialog"
-			widgetVar="newEventDialog" width="300" height="300">
-			<p:outputPanel>
-				<p:outputLabel for="eventName" value="Name:" />
-				<p:inputText id="eventName" label="eventName"
-					value="#{eventBean.newEvent.name}" />
-				<p:outputLabel for="eventCatagory" value="Catagory:" />
-				<p:inputText id="eventCatagory" label="Catagory"
-					value="#{eventBean.newEvent.catagory}" />
-				<p:outputLabel for="eventDate" value="Date:" />
-				<p:inputText id="eventDate" label="Date"
-					value="#{eventBean.newEvent.date}" />
-				<p:outputLabel for="eventLocation" value="Location:" />
-				<p:inputText id="eventLocation" label="Location"
-					value="#{eventBean.newEvent.location}" />
-				<p:outputLabel for="eventRaiting" value="Raiting:" />
-				<p:inputText id="eventRaiting" label="Raiting"
-					value="#{eventBean.newEvent.raiting}" />
+			<p:dialog dynamic="true" id="newEventDialog"
+				widgetVar="newEventDialog" width="300" height="300">
+				<p:outputPanel>
+					<p:outputLabel for="eventName" value="Name:" />
+					<p:inputText id="eventName" label="eventName"
+						value="#{eventBean.newEvent.name}" />
+					<p:outputLabel for="eventCatagory" value="Catagory:" />
+					<p:inputText id="eventCatagory" label="Catagory"
+						value="#{eventBean.newEvent.catagory}" />
+					<p:outputLabel for="eventDate" value="Date:" />
+					<p:inputText id="eventDate" label="Date"
+						value="#{eventBean.newEvent.date}" />
+					<p:outputLabel for="eventLocation" value="Location:" />
+					<p:inputText id="eventLocation" label="Location"
+						value="#{eventBean.newEvent.location}" />
+					<p:outputLabel for="eventRaiting" value="Raiting:" />
+					<p:inputText id="eventRaiting" label="Raiting"
+						value="#{eventBean.newEvent.raiting}" />
 
-			</p:outputPanel>
+				</p:outputPanel>
 				<p:commandButton action="#{eventBean.createNewEvent}" value="Spara"
-					 update="tagTable" onsuccess="PF('newEventDialog').hide()" />
+					update="eventTable" onsuccess="PF('newEventDialog').hide()" />
+			</p:dialog>
 
-		</p:dialog>
-		<!-- update="eventTable" -->
-
-
-		<p:separator />
-
-		<p:dataTable id="tagTable" value="#{tagBean.tags}" var="tag">
-			<f:facet name="header">
-				<h:outputText value="Tags" />
-			</f:facet>
-			<p:column headerText="Name">
-				<h:outputLabel value="#{tag.name}" />
-			</p:column>
-			<p:column headerText="Delete" widht="25">
-				<p:commandButton action="#{tagBean.deleteTag(tag)}"
-					icon="ui-icon-trash" update="tagTable" />
-			</p:column>
-
-
-			<f:facet name="footer">
-				<p:commandLink value="Add tag" icon="ui-icon-plus"
-					oncomplete="PF('newTagDialog').show()" />
-					</f:facet>
-		</p:dataTable>
-
-		<p:dialog dynamic="true" id="newTagDialog"
-			widgetVar="newTagDialog" width="300" height="300">
-			<p:outputPanel>
-				<p:outputLabel for="tagName" value="Name:" />
-				<p:inputText id="tagName" label="TagName"
-					value="#{tagBean.newTag.name}" />
-
-			</p:outputPanel>
-				<p:commandButton action="#{tagBean.createNewTag}" value="Spara"
-					 update="tagTable" onsuccess="PF('newTagDialog').hide()" />
-		</p:dialog>
-
-	</h:form>
+			<p:separator />
+		</h:form>
+	</p:panelGrid>
 </h:body>
 </html>

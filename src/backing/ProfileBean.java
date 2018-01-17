@@ -45,4 +45,11 @@ public class ProfileBean implements Serializable {
 		profileTarget.path("{id}").resolveTemplate("id", pro.getId()).request(MediaType.APPLICATION_XML).delete();
 	}
 
+	public void getYourEevents(){
+		
+	}
+	
+	
+	
+	
 }

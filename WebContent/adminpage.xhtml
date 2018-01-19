@@ -170,8 +170,8 @@
 		<p:dialog dynamic="true" id="editTagDialog"
 			widgetVar="newTagDialog" width="300" height="300">
 			<p:outputPanel>
-				<p:outputLabel for="tagName" value="#{tagBean.findById(tag)}" />
-				<p:inputText id="tagName" label="TagName"
+				<p:outputLabel for="tagEditName" value="tagBean.findById(tag)}" />
+				<p:inputText id="tagEditName" label="TagName"
 					value="#{tagBean.newTag.name}" />
 
 			</p:outputPanel>

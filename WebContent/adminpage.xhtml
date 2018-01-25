@@ -8,68 +8,120 @@
 	xmlns:p="http://primefaces.org/ui">
 <h:head></h:head>
 <h:body>
-	<h:form>
+	<h:form id="profileForm">
+
 		<p:dataTable id="profileTable" value="#{profileBean.profiles}"
-			var="pro">
+			var="pro" editable="true" editMode="cell">
 			<f:facet name="header">
 				<h:outputText value="Profiles" />
 			</f:facet>
+<!-- 			<p:ajax event="cellEdit" listener="#{profileBean.editProfile(pro)}" update="profileTable" /> -->				
 			<p:column headerText="Email">
-				<h:outputLabel value="#{pro.email}" />
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{pro.emails}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText value="#{pro.emails}" />
+					</f:facet>
+				</p:cellEditor>
 			</p:column>
+
 			<p:column headerText="Password">
-				<h:outputLabel value="#{pro.password}" />
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputLabel value="#{pro.password}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText value="#{pro.password}" />
+					</f:facet>
+				</p:cellEditor>
 			</p:column>
+
 			<p:column headerText="Name">
-				<h:outputLabel value="#{pro.name}" />
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputLabel value="#{pro.name}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText value="#{pro.name}" />
+					</f:facet>
+				</p:cellEditor>
+
 			</p:column>
-			<p:column headerText="Raiting">
-				<h:outputLabel value="#{pro.profileRating}" />
-			</p:column>
+
 			<p:column headerText="Bio">
-				<h:outputLabel value="#{pro.bio}" />
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputLabel value="#{pro.bio}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText value="#{pro.bio}" />
+					</f:facet>
+				</p:cellEditor>
 			</p:column>
-			<p:column headerText="Photo">
-				<h:outputLabel value="#{pro.photo}" />
+
+			<p:column headerText="Roles">
+				<p:cellEditor>
+					<f:facet name="output">
+						<p:dataList value="#{pro.roleResult}" var="r">#{r.rolename}</p:dataList>
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText value="#{pro.roleResult}" />
+					</f:facet>
+				</p:cellEditor>
 			</p:column>
-			<p:column headerText="Delete" widht="5%">
+
+		<p:column style="width:35px">
+				<p:commandButton action="#{profileBean.editProfile(pro)}"
+					 value="Edit" update="profileTable" />
+			</p:column>
+
+
+			<p:column style="width:35px">
 				<p:commandButton action="#{profileBean.deleteProfile(pro)}"
 					icon="ui-icon-trash" update="profileTable" />
 			</p:column>
+
+
 			<f:facet name="footer">
 				<p:commandLink value="Add profile" icon="ui-icon-plus"
 					oncomplete="PF('newProfileDialog').show()" />
 			</f:facet>
 		</p:dataTable>
 
-
 		<p:dialog dynamic="true" id="newProfileDialog"
 			widgetVar="newProfileDialog" width="300" height="300">
 			<p:outputPanel>
+
 				<p:outputLabel for="email" value="Email:" />
 				<p:inputText id="email" label="email"
-					value="#{profileBean.newProfile.email}" />
+					value="#{profileBean.newProfile.emails}" />
+				<br />
 				<p:outputLabel for="password" value="Password:" />
 				<p:inputText id="password" label="password"
 					value="#{profileBean.newProfile.password}" />
+				<br />
 				<p:outputLabel for="name" value="Name:" />
 				<p:inputText id="name" label="name"
 					value="#{profileBean.newProfile.name}" />
-				<p:outputLabel for="bio" value="Bio:" />
+				<br />
+				<p:outputLabel for="bio" value="Biographies:" />
 				<p:inputText id="bio" label="bio"
 					value="#{profileBean.newProfile.bio}" />
-				<p:outputLabel for="profileRating" value="Rating:" />
-				<p:inputText id="profileRating" label="profileRating"
-					value="#{profileBean.newProfile.profileRating}" />
-				<p:outputLabel for="photo" value="Photo:" />
-				<p:inputText id="photo" label="photo"
-					value="#{profileBean.newProfile.photo}" />
-			</p:outputPanel>
-				<p:commandButton action="#{profileBean.createNewProfile}"
-					value="Spara" update="profileTable"
-					onsuccess="PF('newProfileDialog').hide()" />
+				<br />
 
+			</p:outputPanel>
+			<br />
+			<p:commandButton action="#{profileBean.createNewProfile}"
+				value="Spara" update="profileTable"
+				onsuccess="PF('newProfileDialog').hide()" />
 		</p:dialog>
+
+
+
+
+
 
 		<p:separator />
 
@@ -92,14 +144,14 @@
 			<p:column headerText="Raiting">
 				<h:outputLabel value="#{eve.raiting}" />
 			</p:column>
-			<p:column headerText="Delete" widht="25" >
+			<p:column headerText="Delete" widht="25">
 				<p:commandButton action="#{eventBean.deleteEvent(eve)}"
 					icon="ui-icon-trash" update="eventTable" />
 			</p:column>
 
 			<f:facet name="footer">
 				<p:commandLink value="Add event" icon="ui-icon-plus"
-			update="eventTable"	oncomplete="PF('newEventDialog').show()" />
+					update="eventTable" oncomplete="PF('newEventDialog').show()" />
 			</f:facet>
 		</p:dataTable>
 
@@ -124,8 +176,8 @@
 					value="#{eventBean.newEvent.raiting}" />
 
 			</p:outputPanel>
-				<p:commandButton action="#{eventBean.createNewEvent}" value="Spara"
-					update="eventTable"  onsuccess="PF('newEventDialog').hide()" />
+			<p:commandButton action="#{eventBean.createNewEvent}" value="Spara"
+				update="eventTable" onsuccess="PF('newEventDialog').hide()" />
 		</p:dialog>
 
 		<p:separator />
@@ -137,46 +189,46 @@
 			<p:column headerText="Name">
 				<h:outputLabel value="#{tag.name}" />
 			</p:column>
-			
+
 			<p:column headerText="Update" widht="25">
 				<p:commandLink value="Edit tag" icon="ui-icon-plus"
 					oncomplete="PF('editTagDialog').show()" />
-					
+
 			</p:column>
-			
+
 			<p:column headerText="Delete" widht="25">
 				<p:commandButton action="#{tagBean.deleteTag(tag)}"
 					icon="ui-icon-trash" update="tagTable" />
-			</p:column> 
+			</p:column>
 
 			<f:facet name="footer">
 				<p:commandLink value="Add tag" icon="ui-icon-plus"
 					oncomplete="PF('newTagDialog').show()" />
-					</f:facet>
+			</f:facet>
 		</p:dataTable>
 
-		<p:dialog dynamic="true" id="newTagDialog"
-			widgetVar="newTagDialog" width="300" height="300">
+		<p:dialog dynamic="true" id="newTagDialog" widgetVar="newTagDialog"
+			width="300" height="300">
 			<p:outputPanel>
 				<p:outputLabel for="tagName" value="Name:" />
 				<p:inputText id="tagName" label="TagName"
 					value="#{tagBean.newTag.name}" />
 
 			</p:outputPanel>
-				<p:commandButton action="#{tagBean.createNewTag}" value="Spara"
-					 update="tagTable" onsuccess="PF('newTagDialog').hide()" />
+			<p:commandButton action="#{tagBean.createNewTag}" value="Spara"
+				update="tagTable" onsuccess="PF('newTagDialog').hide()" />
 		</p:dialog>
 
-		<p:dialog dynamic="true" id="editTagDialog"
-			widgetVar="newTagDialog" width="300" height="300">
+		<p:dialog dynamic="true" id="editTagDialog" widgetVar="newTagDialog"
+			width="300" height="300">
 			<p:outputPanel>
 				<p:outputLabel for="tagEditName" value="tagBean.findById(tag)}" />
 				<p:inputText id="tagEditName" label="TagName"
 					value="#{tagBean.newTag.name}" />
 
 			</p:outputPanel>
-				<p:commandButton action="#{tagBean.createNewTag}" value="Spara"
-					 update="tagTable" onsuccess="PF('newTagDialog').hide()" />
+			<p:commandButton action="#{tagBean.createNewTag}" value="Spara"
+				update="tagTable" onsuccess="PF('newTagDialog').hide()" />
 		</p:dialog>
 
 

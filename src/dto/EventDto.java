@@ -22,13 +22,14 @@ public class EventDto {
 	public EventDto() {
 	}
 
-	public EventDto(int eventid, String name, String category, String date, String location, int raiting) {
+	public EventDto(int eventid, String name, String caregory, String date, String location, double raiting) {
 		this.eventid = eventid;
 		this.name = name;
-		this.catagory = category;
+		this.catagory = caregory;
 		this.date = date;
 		this.location = location;
 		this.raiting = raiting;
+
 	}
 
 	public int getEventid() {

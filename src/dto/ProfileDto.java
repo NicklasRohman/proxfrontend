@@ -2,56 +2,50 @@ package dto;
 
 import java.util.List;
 import javax.xml.bind.annotation.XmlElement;
+
 import javax.xml.bind.annotation.*;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 public class ProfileDto {
 
-	@XmlElement(name="profileid")
-	private int id;
-	@XmlElement
-	private String email;
+	@XmlElement(name ="emails")
+	private String emails;
 	@XmlElement
 	private String password;
 	@XmlElement
 	private String name;
 	@XmlElement
 	private String bio;
-	@XmlElement
-	private String photo;
-	@XmlElement
-	private double profileRating;
+//	@XmlElement
+//	private String photo;
+//	@XmlElement
+//	private double profileRating;
+
+	@XmlElementWrapper(name = "roles")
+	@XmlElement(name = "role")
+	private List<RoleDto> roleResult;
 
 	@XmlElementWrapper(name = "eventResult")
 	@XmlElement(name = "event")
 	private List<EventDto> eventResult;
 
 	public ProfileDto(){}
-	
-	public ProfileDto(int id, String email, String password, String name, String bio, double rating) {
-		this.id = id;
-		this.email = email;
+
+	public ProfileDto(String emails, String password, String name, String bio, List<RoleDto> roles) {
+		this.emails = emails;
 		this.password = password;
 		this.name = name;
 		this.bio = bio;
-		this.profileRating = rating;
+		this.roleResult=roles;
 	}
 
-	public int getId() {
-		return id;
+	public String getEmails() {
+		return emails;
 	}
 
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
+	public void setEmails(String emails) {
+		this.emails = emails;
 	}
 
 	public String getPassword() {
@@ -78,21 +72,21 @@ public class ProfileDto {
 		this.bio = bio;
 	}
 
-	public String getPhoto() {
-		return photo;
-	}
-
-	public void setPhoto(String photo) {
-		this.photo = photo;
-	}
-
-	public double getProfileRating() {
-		return profileRating;
-	}
-
-	public void setProfileRating(double rating) {
-		this.profileRating = rating;
-	}
+//	public String getPhoto() {
+//		return photo;
+//	}
+//
+//	public void setPhoto(String photo) {
+//		this.photo = photo;
+//	}
+//
+//	public double getProfileRating() {
+//		return profileRating;
+//	}
+//
+//	public void setProfileRating(double rating) {
+//		this.profileRating = rating;
+//	}
 
 	public List<EventDto> getEventResult() {
 		return eventResult;
@@ -100,6 +94,14 @@ public class ProfileDto {
 
 	public void setEventResult(List<EventDto> eventResult) {
 		this.eventResult = eventResult;
+	}
+
+	public List<RoleDto> getRoleResult() {
+		return roleResult;
+	}
+
+	public void setRoleResult(List<RoleDto> roles) {
+		this.roleResult = roles;
 	}
 
 }

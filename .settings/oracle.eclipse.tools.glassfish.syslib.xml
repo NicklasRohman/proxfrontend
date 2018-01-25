@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<system-libraries>
+    <library path="C:/payara41/glassfish/modules/jersey-client.jar" source="C:/Users/Nicklas/Downloads/jersey-client-2.25.1-sources.jar"/>
+    <library path="C:/payara41/glassfish/modules/jersey-common.jar" source="C:/Users/Nicklas/Downloads/jersey-common-2.16-sources.jar"/>
+</system-libraries>

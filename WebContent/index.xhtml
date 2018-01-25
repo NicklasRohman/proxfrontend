@@ -9,9 +9,7 @@
 <h:head></h:head>
 <h:body>
 	<p:panelGrid columns="2">
-
 		<h:form>
-
 			<p:panelGrid columns="2">
 
 				<f:facet name="header">
@@ -21,53 +19,17 @@
 				<h:outputText value="Name:" />
 				<h:outputText value="#{profileBean.profiles}" />
 
-				<h:outputText value="Team:" />
-				<h:outputText value="Los Angeles Lakers" />
+				<h:outputText value="Email" />
+				<h:outputText value="" />
 
-				<h:outputText value="Position:" />
-				<h:outputText value="Shooting Guard" />
-
-				<h:outputText value="Number:" />
-				<h:outputText value="24" />
+				<h:outputText value="Biographies" />
+				<h:outputText value="" />
 
 		<f:facet name="footer">
-<p:button href="adminpage.xhtml" value="Admin" rendered="admin"></p:button><p:button href="login.xhtml" value="Logout"></p:button>
+<p:button href="adminpage.xhtml" value="Admin" rendered="#{request.isUserInRole('admin')}"/>
+<p:commandButton value="LogoutButton" actionListener="#{profileBean.logout()}" />
 </f:facet>
-
 			</p:panelGrid>
-
-
-			<p:dataTable id="profileTable" value="#{profileBean.profiles}"
-				var="pro">
-				<f:facet name="header">
-					<h:outputText value="Profiles" />
-				</f:facet>
-				<p:column headerText="Email">
-					<h:outputLabel value="#{pro.email}" />
-				</p:column>
-
-				<p:column headerText="Name">
-					<h:outputLabel value="#{pro.name}" />
-				</p:column>
-
-				<p:column headerText="Raiting">
-					<h:outputLabel value="#{pro.profileRating}" />
-				</p:column>
-
-				<p:column headerText="Bio">
-					<h:outputLabel value="#{pro.bio}" />
-				</p:column>
-
-				<p:column headerText="Photo">
-					<h:inputFile value="" />
-					<h:outputLabel value="#{pro.photo}" />
-				</p:column>
-				<p:column headerText="Delete" widht="5%">
-					<p:commandButton action="#{profileBean.deleteProfile(pro)}"
-						icon="ui-icon-trash" update="profileTable" />
-				</p:column>
-
-			</p:dataTable>
 
 			<p:separator />
 
@@ -100,7 +62,6 @@
 						update="eventTable" oncomplete="PF('newEventDialog').show()" />
 				</f:facet>
 			</p:dataTable>
-
 
 			<p:dialog dynamic="true" id="newEventDialog"
 				widgetVar="newEventDialog" width="300" height="300">

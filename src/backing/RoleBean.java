@@ -10,6 +10,8 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+
+import dto.ProfileDto;
 import dto.RoleDto;
 
 @Named
@@ -23,7 +25,8 @@ public class RoleBean implements Serializable{
 	private String selectedRole;
 
 	public List<RoleDto> getRoles(){
-	return roleTarget.request(MediaType.APPLICATION_XML).get(new GenericType<List<RoleDto>>(){});
+		List<RoleDto> result = roleTarget.request(MediaType.APPLICATION_XML).get(new GenericType<List<RoleDto>>(){});
+		return result;
 	}
 	
 	public RoleDto getNewRole(){
@@ -46,11 +49,15 @@ public class RoleBean implements Serializable{
 		newRole=null;
 	}	
 	
-	public String findRoleByName(String id){
-		Response r = roleTarget.path("{id}").resolveTemplate("id", id).request(MediaType.APPLICATION_XML).get();
-	String result = r.toString();
-		return result;
-	}
+//	public RoleDto findRoleByName(String id){
+//		
+//		RoleDto role = new RoleDto(id);
+//		
+//		Object r = roleTarget.path("{id}").resolveTemplate("id", id).request(MediaType.APPLICATION_XML).get();
+//		
+//		
+//		return role;
+//	}
 
 	public String getSelectedRole() {
 		return selectedRole;

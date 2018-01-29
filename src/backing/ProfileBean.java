@@ -44,13 +44,10 @@ public class ProfileBean implements Serializable {
 
 	public void createNewProfile() {
 
-		for (RoleDto r : newProfile.getRoleResult()) {
-			System.out.println(r.getRolename());
-		}
-
 		profileTarget.request(MediaType.APPLICATION_XML).post(Entity.xml(newProfile));
 		newProfile = null;
 		profiles = null;
+		
 	}
 
 	public void cancelNewProfile() {

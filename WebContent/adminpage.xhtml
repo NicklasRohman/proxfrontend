@@ -9,7 +9,7 @@
 <h:head></h:head>
 <h:body>
 	<h:form id="profileForm">
-
+		<p:messages autoUpdate="true" />
 		<p:dataTable id="profileTable" value="#{profileBean.profiles}"
 			var="pro" editable="true" editMode="cell">
 			<f:facet name="header">
@@ -61,16 +61,15 @@
 				</p:cellEditor>
 			</p:column>
 
-			<p:column headerText="Roles">
-				<p:cellEditor>
-					<f:facet name="output">
-						<p:dataList value="#{pro.roleResult}" var="r">#{r.rolename}</p:dataList>
-					</f:facet>
-					<f:facet name="input">
-						<p:inputText value="#{pro.roleResult}" />
-					</f:facet>
-				</p:cellEditor>
+
+			<p:column headerText="MenyRoles">
+				<p:selectManyMenu id="roleColumnOption" value="#{pro.roleResult}"
+					converter="roleConverter" converterMessage="Fail to Convert">
+					<f:selectItems value="#{roleBean.roles}" var="r" itemValue="#{r}"
+						itemLabel="#{r.rolename}" />
+				</p:selectManyMenu>
 			</p:column>
+
 
 			<p:column style="width:35px">
 				<p:commandButton action="#{profileBean.editProfile(pro)}"
@@ -86,6 +85,7 @@
 
 			<f:facet name="footer">
 				<p:commandLink value="Add profile" icon="ui-icon-plus"
+					update="profileForm:newProfileDialog"
 					oncomplete="PF('newProfileDialog').show()" />
 			</f:facet>
 		</p:dataTable>
@@ -114,21 +114,20 @@
 					value="#{profileBean.newProfile.bio}" />
 				<br />
 				<p:outputLabel value="Role" />
-				<br/>
-				<p:selectOneMenu id="roleOption"
+				<br />
+				<p:selectManyMenu id="roleOption"
 					value="#{profileBean.newProfile.roleResult}"
-					converter="roleConverter" converterMessage="Fail to Convert"
-					validatorMessage="Fail to validade">
-					<f:selectItems value="#{roleBean.roles}" var="r"
-						itemValue="#{r.rolename}" itemLabels="#{r.rolename}" />
-				</p:selectOneMenu>
+					converter="roleConverter" converterMessage="Fail to Convert">
+					<f:selectItems value="#{roleBean.roles}" var="r" itemValue="#{r}"
+						itemLabel="#{r.rolename}" />
+				</p:selectManyMenu>
 
+				<br />
 
 			</p:outputPanel>
-			<br />
-			<p:commandButton action="#{profileBean.createNewProfile}"
-				value="Spara" update="profileTable"
-				onsuccess="PF('newProfileDialog').hide()" />
+			<p:commandButton process="profileForm:newProfileDialog"
+				action="#{profileBean.createNewProfile}" value="Spara"
+				update="profileTable" onsuccess="PF('newProfileDialog').hide()" />
 		</p:dialog>
 
 

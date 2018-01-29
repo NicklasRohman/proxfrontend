@@ -17,12 +17,6 @@ public class ProfileDto {
 	private String name;
 	@XmlElement
 	private String bio;
-	
-	private String testrole;
-//	@XmlElement
-//	private String photo;
-//	@XmlElement
-//	private double profileRating;
 
 	@XmlElementWrapper(name = "roles")
 	@XmlElement(name = "role")
@@ -34,18 +28,6 @@ public class ProfileDto {
 
 	public ProfileDto(){}
 
-	public ProfileDto(String emails, String password, String name, String bio, String roles) {
-		this.emails = emails;
-		this.password = password;
-		this.name = name;
-		this.bio = bio;
-
-		for (RoleDto r : roleResult) {
-			r.setRolename(roles);
-		}
-		
-		
-	}
 
 	public String getEmails() {
 		return emails;
@@ -78,22 +60,6 @@ public class ProfileDto {
 	public void setBio(String bio) {
 		this.bio = bio;
 	}
-
-//	public String getPhoto() {
-//		return photo;
-//	}
-//
-//	public void setPhoto(String photo) {
-//		this.photo = photo;
-//	}
-//
-//	public double getProfileRating() {
-//		return profileRating;
-//	}
-//
-//	public void setProfileRating(double rating) {
-//		this.profileRating = rating;
-//	}
 
 	public List<EventDto> getEventResult() {
 		return eventResult;

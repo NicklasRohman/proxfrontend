@@ -9,21 +9,36 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class RoleDto {
 
-	
 	@XmlElement(name = "roleName")
 	private String rolename;
 
-	public RoleDto() {}
-	
-	public RoleDto(String rolename) {
-	this.rolename = rolename;	
+	public RoleDto() {
 	}
-	
+
+	public RoleDto(String rolename) {
+		this.rolename = rolename;
+	}
+
 	public String getRolename() {
 		return rolename;
 	}
+
 	public void setRolename(String rolename) {
 		this.rolename = rolename;
 	}
-	
+
+	@Override
+	public boolean equals(Object other) {
+		return (other instanceof RoleDto) && (rolename != null) 
+				? rolename.equalsIgnoreCase(((RoleDto) other).rolename)
+				: (other == this);
+	}
+
+	@Override
+	public int hashCode() {
+		return (rolename != null) 
+				? this.getClass().hashCode() 
+						: super.hashCode();
+	}
+
 }

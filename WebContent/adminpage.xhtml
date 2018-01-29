@@ -15,7 +15,7 @@
 			<f:facet name="header">
 				<h:outputText value="Profiles" />
 			</f:facet>
-<!-- 			<p:ajax event="cellEdit" listener="#{profileBean.editProfile(pro)}" update="profileTable" /> -->				
+
 			<p:column headerText="Email">
 				<p:cellEditor>
 					<f:facet name="output">
@@ -72,9 +72,9 @@
 				</p:cellEditor>
 			</p:column>
 
-		<p:column style="width:35px">
+			<p:column style="width:35px">
 				<p:commandButton action="#{profileBean.editProfile(pro)}"
-					 value="Edit" update="profileTable" />
+					icon="ui-icon-pencil" update="profileTable" />
 			</p:column>
 
 
@@ -91,25 +91,38 @@
 		</p:dataTable>
 
 		<p:dialog dynamic="true" id="newProfileDialog"
-			widgetVar="newProfileDialog" width="300" height="300">
+			widgetVar="newProfileDialog" width="300" height="350">
 			<p:outputPanel>
 
 				<p:outputLabel for="email" value="Email:" />
 				<p:inputText id="email" label="email"
-					value="#{profileBean.newProfile.emails}" />
+					value="#{profileBean.newProfile.emails}" required="true"
+					requiredMessage="User most have a Email" />
 				<br />
 				<p:outputLabel for="password" value="Password:" />
-				<p:inputText id="password" label="password"
-					value="#{profileBean.newProfile.password}" />
+				<p:inputText type="password" id="password" label="password"
+					value="#{profileBean.newProfile.password}" required="true"
+					requiredMessage="User most have a password" />
 				<br />
 				<p:outputLabel for="name" value="Name:" />
 				<p:inputText id="name" label="name"
-					value="#{profileBean.newProfile.name}" />
+					value="#{profileBean.newProfile.name}" required="true"
+					requiredMessage="User most have a name" />
 				<br />
 				<p:outputLabel for="bio" value="Biographies:" />
 				<p:inputText id="bio" label="bio"
 					value="#{profileBean.newProfile.bio}" />
 				<br />
+				<p:outputLabel value="Role" />
+				<br/>
+				<p:selectOneMenu id="roleOption"
+					value="#{profileBean.newProfile.roleResult}"
+					converter="roleConverter" converterMessage="Fail to Convert"
+					validatorMessage="Fail to validade">
+					<f:selectItems value="#{roleBean.roles}" var="r"
+						itemValue="#{r.rolename}" itemLabels="#{r.rolename}" />
+				</p:selectOneMenu>
+
 
 			</p:outputPanel>
 			<br />
@@ -123,28 +136,92 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 		<p:separator />
 
-		<p:dataTable id="eventTable" value="#{eventBean.events}" var="eve">
+		<p:dataTable id="eventTable" value="#{eventBean.events}" var="eve"
+			editable="true" editMode="cell">
 			<f:facet name="header">
 				<h:outputText value="Events" />
 			</f:facet>
+
 			<p:column headerText="Name">
-				<h:outputLabel value="#{eve.name}" />
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputLabel value="#{eve.name}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText value="#{eve.name}" />
+					</f:facet>
+
+				</p:cellEditor>
 			</p:column>
+
 			<p:column headerText="Category">
-				<h:outputLabel value="#{eve.catagory}" />
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputLabel value="#{eve.catagory}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText value="#{eve.catagory}" />
+					</f:facet>
+				</p:cellEditor>
 			</p:column>
+
 			<p:column headerText="Date">
-				<h:outputLabel value="#{eve.date}" />
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputLabel value="#{eve.date}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText value="#{eve.date}" />
+					</f:facet>
+				</p:cellEditor>
 			</p:column>
+
 			<p:column headerText="Location">
-				<h:outputLabel value="#{eve.location}" />
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputLabel value="#{eve.location}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText value="#{eve.location}" />
+					</f:facet>
+				</p:cellEditor>
 			</p:column>
+
 			<p:column headerText="Raiting">
-				<h:outputLabel value="#{eve.raiting}" />
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputLabel value="#{eve.raiting}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText value="#{eve.raiting}" />
+					</f:facet>
+				</p:cellEditor>
 			</p:column>
-			<p:column headerText="Delete" widht="25">
+
+			<p:column style="width:35px">
+				<p:commandButton action="#{eventBean.editEvent(eve)}"
+					icon="ui-icon-pencil" update="eventTable" />
+			</p:column>
+
+
+			<p:column style="width:35px">
 				<p:commandButton action="#{eventBean.deleteEvent(eve)}"
 					icon="ui-icon-trash" update="eventTable" />
 			</p:column>
@@ -182,7 +259,8 @@
 
 		<p:separator />
 
-		<p:dataTable id="tagTable" value="#{tagBean.tags}" var="tag">
+		<p:dataTable id="tagTable" value="#{tagBean.tags}" var="tag"
+			editable="true" editMode="cell">
 			<f:facet name="header">
 				<h:outputText value="Tags" />
 			</f:facet>
@@ -230,7 +308,6 @@
 			<p:commandButton action="#{tagBean.createNewTag}" value="Spara"
 				update="tagTable" onsuccess="PF('newTagDialog').hide()" />
 		</p:dialog>
-
 
 	</h:form>
 </h:body>

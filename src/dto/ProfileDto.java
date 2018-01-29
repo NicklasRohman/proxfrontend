@@ -17,6 +17,8 @@ public class ProfileDto {
 	private String name;
 	@XmlElement
 	private String bio;
+	
+	private String testrole;
 //	@XmlElement
 //	private String photo;
 //	@XmlElement
@@ -32,12 +34,17 @@ public class ProfileDto {
 
 	public ProfileDto(){}
 
-	public ProfileDto(String emails, String password, String name, String bio, List<RoleDto> roles) {
+	public ProfileDto(String emails, String password, String name, String bio, String roles) {
 		this.emails = emails;
 		this.password = password;
 		this.name = name;
 		this.bio = bio;
-		this.roleResult=roles;
+
+		for (RoleDto r : roleResult) {
+			r.setRolename(roles);
+		}
+		
+		
 	}
 
 	public String getEmails() {
